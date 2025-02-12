@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Bouffe</title>
+    <script>
+        async function findRestaurants() {
+            const typeRepas = document.getElementById("typeRepas").value;
+            const localisation = document.getElementById("localisation").value;
+            
+            const response = await fetch("http://127.0.0.1:5000/find_restaurants", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ type_repas: typeRepas, localisation: localisation })
+            });
+
+            const data = await response.json();
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = ""; 
+
+            if (data.error) {
+                resultsDiv.innerHTML = `<p style="color:red">${data.error}</p>`;
+                return;
+            }
+
+            data.restaurants.forEach((resto, index) => {
+                resultsDiv.innerHTML += `
+                    <div>
+                        <h3>${index + 1}. ${resto.nom}</h3>
+                        <p>📍 ${resto.adresse}</p>
+                        <p>📞 ${resto.téléphone}</p>
+                        <a href="${resto.lien_map}" target="_blank">Voir sur Google Maps</a>
+                        <hr>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Vous voulez trouver de la bouffe ?</h1>
+
+    <form onsubmit="event.preventDefault(); findRestaurants();">
+        <label for="typeRepas">Type de repas :</label>
+        <input type="text" id="typeRepas" required>
+
+        <label for="localisation">Localisation :</label>
+        <input type="text" id="localisation" required>
+
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <div id="results"></div>
+
+</body>
+</html>

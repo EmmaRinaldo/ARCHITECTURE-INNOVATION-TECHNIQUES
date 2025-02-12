@@ -1,0 +1,90 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Titre */
+h1 {
+    color: #283618;
+    text-align: center;
+}
+
+/* Formulaire */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+button {
+    background-color: #bc6c25;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #dda15e;
+}
+
+/* Résultats */
+#results {
+    margin-top: 20px;
+    width: 350px;
+}
+
+#results div {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+#results h3 {
+    margin: 0 0 5px;
+    color: #283618;
+}
+
+#results p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+#results a {
+    text-decoration: none;
+    color: #606c38;
+    font-weight: bold;
+}
+
+#results a:hover {
+    text-decoration: underline;
+}

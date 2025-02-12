@@ -9,21 +9,23 @@ def load_api_keys():
 
 def get_user_preferences():
     print("Bienvenue ! Je vais t'aider à choisir un restaurant.")
-    type_repas = input("Que veux-tu manger ? (ex: pizza, sushi, vegan, etc.) : ")
+    type_repas = input("Que veux-tu manger ? (ex: pizza, sushi, vegan, créole, etc.) : ")
     localisation = input("Où cherches-tu un restaurant ? (ville ou adresse) : ")
     return type_repas, localisation
 
 def refine_query_with_chatgpt(api_key, user_input, location):
     """
     Utilise ChatGPT pour reformuler la requête afin d'améliorer la recherche de restaurants pertinents,
-    en intégrant des mots-clés optimisés pour Google Maps et en ajoutant le lieu pour plus de précision.
+    en intégrant des mots-clés optimisés pour Google Maps, en corrigeant les fautes d'orthographe,
+    et en ajoutant le lieu pour plus de précision.
     """
     openai.api_key = api_key
     prompt = f"""
     Un utilisateur cherche un restaurant correspondant à sa demande : "{user_input}" dans la ville de "{location}".
-    Reformule cette demande en une requête optimisée sous forme de mots-clés pertinents pour un moteur de recherche comme Google Maps.
-    Assure-toi d'inclure des termes précis liés à la spécialité et au type de cuisine recherchés.
-    Donne uniquement la requête optimisée sans explication supplémentaire.
+    1. Corrige toute faute d'orthographe ou terme incorrect lié à la cuisine.
+    2. Reformule cette demande en une requête optimisée sous forme de mots-clés pertinents pour un moteur de recherche comme Google Maps.
+    3. Assure-toi d'inclure des termes précis liés à la spécialité et au type de cuisine recherchés.
+    4. Donne uniquement la requête optimisée sans explication supplémentaire.
     """
     
     response = openai.chat.completions.create(
